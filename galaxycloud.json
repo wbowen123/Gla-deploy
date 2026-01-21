@@ -1,0 +1,13 @@
+// galaxycloud.json
+{
+  "version": "1.0",
+  "name": "navigation-page",
+  "type": "static",
+  "healthCheck": {
+    "path": "/",
+    "interval": 5,
+    "timeout": 10,
+    "healthyThreshold": 2,
+    "unhealthyThreshold": 3
+  }
+}
