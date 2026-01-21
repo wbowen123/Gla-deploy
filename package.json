@@ -1,18 +1,13 @@
 {
-  "name": "node",
+  "name": "navigation-page",
   "version": "1.0.0",
-  "description": "node",
-  "main": "index.js",
-  "private": false,
+  "description": "个人导航页",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js",
-    "build": "echo \"No build needed for static site\""
-  },
-  "dependencies": {
-    "axios": "latest",
-    "express": "^4.18.2"
+    "start": "node server.js",
+    "dev": "node server.js"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=14.0.0"
   }
 }
