@@ -3,206 +3,301 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的导航页 - 优化版</title>
-    <!-- 使用Google Fonts提升字体美观性 -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+    <title>我的导航页</title>
+    <meta name="description" content="个人导航页 - 快速访问常用网站">
+    <!-- 添加兼容性meta标签 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --primary-color: #4388e0; /* 调整为主色调 */
-            --background-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --primary-color: #4388e0;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --card-bg: rgba(255, 255, 255, 0.25);
-            --card-hover-bg: rgba(255, 255, 255, 0.85);
+            --card-hover-bg: rgba(255, 255, 255, 0.9);
             --text-color: #333;
-            --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.2);
         }
 
         body {
-            font-family: 'Noto Sans SC', sans-serif; /* 使用更现代的字体 */
-            background: var(--background-gradient); /* 使用CSS渐变替代图片 */
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-gradient);
             background-attachment: fixed;
-            background-size: cover;
-            margin: 0;
-            padding: 20px;
-            color: var(--text-color);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            color: var(--text-color);
         }
 
-        /* 响应式头部和搜索栏 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
         .header {
-            color: #fff;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             text-align: center;
+            margin-bottom: 40px;
         }
 
-        .search-container {
-            padding: 2rem;
-            width: 100%;
-            max-width: 600px; /* 增大最大宽度 */
-            margin: 0 auto 30px;
+        .header h1 {
+            color: #fff;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 搜索框 */
+        .search-wrapper {
+            max-width: 600px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
         }
 
         .search-box {
             width: 100%;
-            padding: 15px 25px;
-            font-size: 1.2rem;
+            padding: 18px 25px;
+            font-size: 1.1rem;
             border: none;
             border-radius: 50px;
-            box-shadow: var(--shadow-light);
-            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.95);
             outline: none;
             transition: all 0.3s ease;
         }
 
         .search-box:focus {
-            box-shadow: var(--shadow-hover);
-            transform: scale(1.02);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+            transform: translateY(-2px);
         }
 
-        /* 响应式网格布局 */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
+        /* 链接网格 */
+        .links-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* 响应式列数 */
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             gap: 20px;
             padding: 10px;
         }
 
-        .link-item {
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            padding: 20px;
-            transition: all 0.3s ease; /* 更流畅的动画 */
-            box-shadow: var(--shadow-light);
-            text-align: center;
-            min-height: 100px; /* 固定高度 */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
+        .link-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px 15px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .link-item:hover {
-            background-color: var(--card-hover-bg);
-            transform: translateY(-5px); /* 更明显的悬停效果 */
-            box-shadow: var(--shadow-hover);
+        .link-card:hover {
+            background: var(--card-hover-bg);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
 
-        .link-item a {
+        .link-card a {
             text-decoration: none;
-            color: var(--text-color);
+            color: inherit;
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%;
             height: 100%;
-            justify-content: center;
         }
 
         .link-icon {
-            width: 40px; /* 增大图标 */
-            height: 40px;
+            width: 48px;
+            height: 48px;
             margin-bottom: 12px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .link-card:hover .link-icon {
+            transform: scale(1.1);
         }
 
         .link-text {
-            font-size: 1rem;
+            font-size: 0.95rem;
+            font-weight: 500;
             text-align: center;
             word-break: break-word;
-            max-width: 100%;
-            font-weight: 500;
         }
 
-        /* 改进的脚注 */
-        .foot_marker {
+        /* 页脚 */
+        .footer {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
             padding: 15px;
             text-align: center;
-            font-size: 0.9rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
             color: rgba(255, 255, 255, 0.9);
-            background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
-            z-index: 1000;
         }
 
-        .foot_marker a {
+        .footer a {
             color: #fff;
             text-decoration: none;
-            padding: 8px 15px;
+            padding: 8px 16px;
             border-radius: 20px;
-            transition: background 0.3s ease;
+            transition: background 0.3s;
         }
 
-        .foot_marker a:hover {
+        .footer a:hover {
             background: rgba(255, 255, 255, 0.2);
         }
 
-        /* 移动端优化 */
-        @media (max-width: 768px) {
-            .header { font-size: 1.5rem; }
-            .search-box { font-size: 1rem; }
-            .link-item { padding: 15px; min-height: 80px; }
-            .link-icon { width: 30px; height: 30px; }
+        /* 占位符图标样式 */
+        .placeholder-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.2rem;
         }
 
-        /* 内联SVG图标样式（替代外部Font Awesome） */
-        .icon { fill: var(--primary-color); }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .links-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+        }
     </style>
 </head>
 <body>
-    <div class="header">我的导航页</div>
-    
-    <div class="search-container">
-        <form action="https://www.google.com/search" method="get" target="_blank" aria-label="Google搜索">
-            <input class="search-box" type="text" name="q" placeholder="搜索..." aria-label="搜索内容">
-        </form>
-    </div>
-    
     <div class="container">
-        <!-- 链接项使用内联SVG图标 -->
-        <div class="link-item">
-            <a href="https://www.google.com" target="_blank" rel="noopener">
-                <svg class="link-icon" viewBox="0 0 24 24"><path class="icon" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-                <span class="link-text">Google</span>
-            </a>
+        <div class="header">
+            <h1>🚀 我的导航页</h1>
         </div>
-        <!-- 其他链接类似处理，为简洁起见省略部分，实际代码中应全部替换 -->
-        <!-- 提示：实际使用中，建议使用工具自动生成SVG图标，或手动添加 -->
         
-        <!-- 示例占位链接（实际应替换为完整内容） -->
-        <div class="link-item">
-            <a href="https://www.baidu.com" target="_blank">
-                <span class="link-text">Baidu</span>
-            </a>
+        <div class="search-wrapper">
+            <form action="https://www.google.com/search" method="get" target="_blank">
+                <input class="search-box" type="text" name="q" placeholder="🔍 Google 搜索..." autocomplete="off">
+            </form>
         </div>
-        <!-- 更多链接... -->
+        
+        <div class="links-grid">
+            <!-- 常用网站 -->
+            <div class="link-card">
+                <a href="https://www.google.com" target="_blank">
+                    <div class="placeholder-icon" style="background: #4285F4;">G</div>
+                    <span class="link-text">Google</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="https://www.baidu.com" target="_blank">
+                    <div class="placeholder-icon" style="background: #4CAF50;">B</div>
+                    <span class="link-text">百度</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="https://www.youtube.com" target="_blank">
+                    <div class="placeholder-icon" style="background: #FF0000;">Y</div>
+                    <span class="link-text">YouTube</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="https://github.com" target="_blank">
+                    <div class="placeholder-icon" style="background: #333;">GH</div>
+                    <span class="link-text">GitHub</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="https://chat.openai.com" target="_blank">
+                    <div class="placeholder-icon" style="background: #10a37f;">AI</div>
+                    <span class="link-text">ChatGPT</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="https://mail.google.com" target="_blank">
+                    <div class="placeholder-icon" style="background: #EA4335;">@</div>
+                    <span class="link-text">Gmail</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="https://huggingface.co" target="_blank">
+                    <div class="placeholder-icon" style="background: #FFAE00;">HF</div>
+                    <span class="link-text">HuggingFace</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="https://dash.cloudflare.com" target="_blank">
+                    <div class="placeholder-icon" style="background: #F38020;">CF</div>
+                    <span class="link-text">Cloudflare</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="https://www.itdog.cn" target="_blank">
+                    <div class="placeholder-icon" style="background: #2196F3;">P</div>
+                    <span class="link-text">ITDOG</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="https://ping0.cc" target="_blank">
+                    <div class="placeholder-icon" style="background: #9C27B0;">P0</div>
+                    <span class="link-text">Ping0</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="https://ssss.nyc.mn" target="_blank">
+                    <div class="placeholder-icon" style="background: #607D8B;">N</div>
+                    <span class="link-text">哪吒面板</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="https://www.nodeseek.com" target="_blank">
+                    <div class="placeholder-icon" style="background: #00BCD4;">NS</div>
+                    <span class="link-text">NodeSeek</span>
+                </a>
+            </div>
+        </div>
     </div>
     
-    <div class="foot_marker">
-        <a href="https://github.com/eooce" target="_blank" rel="noopener">Powered by eooce</a>
+    <div class="footer">
+        <a href="https://github.com/eooce" target="_blank">⚡ Powered by eooce</a>
     </div>
 
     <script>
-        // 简化错误处理：使用内联SVG后通常不需要
-        document.querySelectorAll('.link-item').forEach(item => {
-            // 添加键盘导航支持
-            item.setAttribute('tabindex', '0');
-            item.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    item.querySelector('a').click();
+        // 错误处理：当图标加载失败时显示占位符
+        document.querySelectorAll('.link-icon').forEach(img => {
+            img.onerror = function() {
+                this.style.display = 'none';
+                // 创建占位符
+                const placeholder = document.createElement('div');
+                placeholder.className = 'placeholder-icon';
+                placeholder.textContent = this.alt ? this.alt.substring(0, 2) : '?';
+                placeholder.style.position = 'absolute';
+                this.parentNode.insertBefore(placeholder, this.nextSibling);
+            };
+        });
+
+        // 添加键盘导航支持
+        document.querySelectorAll('.link-card').forEach(card => {
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'link');
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    card.querySelector('a').click();
                 }
             });
         });
+
+        console.log('✅ 导航页加载完成');
     </script>
 </body>
 </html>
